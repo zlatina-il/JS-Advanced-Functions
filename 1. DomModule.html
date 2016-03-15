@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dom Module</title>
+        <script src="DomModule.js"></script>
+    </head>
+    <body>
+        <div id="wrapper"></div>
+        <ul>
+            <li>
+                <a class="button">Click 1</a>
+            </li>
+            <li>
+                <a class="button">Click 2</a>
+            </li>
+            <li>
+                <a class="button">Click 3</a>
+            </li>
+        </ul>
+        <ul>
+            <li>Test 1</li>
+            <li>Test 2</li>
+            <li>Test 3</li>
+            <li>Test 4</li>
+            <li>Test 5</li>
+            <li>Test 6</li>
+        </ul>
+        <script>
+            var div = document.createElement("div");
+            domModule.appendChild(div, "#wrapper");
+            domModule.appendChild(div, "#wrapper");
+            domModule.appendChild(div, "#wrapper");
+            domModule.removeChild("ul", "li:first-child"); 
+            domModule.addHandler("a.button", 'click', 
+                                 function() {
+                                     alert("You click it!")
+                                 });
+
+            for (var i = 0; i < 10; i++) {
+                domModule.appendToBuffer("#wrapper", div.cloneNode(true));
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tree View</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding-left: 25px;
+            background: url(arrow.jpg) 0 0 no-repeat;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .childrenVisible > ul {
+            display: block;
+        }
+
+        .childrenInvisible > ul {
+            display: none;
+        }
+    </style>
+</head>
+<body>    
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="treeview.js"></script>
+</body>
+</html>

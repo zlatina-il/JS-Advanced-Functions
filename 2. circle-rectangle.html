@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Circle and rectangle moving div's</title>
+</head>
+<body>
+    <div id ="wrapper">
+        <input type="button" id="button1" value="Add element to ellipse" onclick="movingShapes.add('ellipse')" />
+        <input type="button" id="button2" value="Add element to square" onclick="movingShapes.add('square')" />
+    </div>
+
+    <script>
+        var movingShapes = (function () {
+
+            function randomNum(start, end) {
+                return Math.floor(Math.random() * (end - start + 1)) + start;
+            }
+
+            function randomColor() {
+                return 'rgba(' + [
+                    randomNum(0, 255),
+                    randomNum(0, 255),
+                    randomNum(0, 255),
+                    randomNum(0, 255)
+                ].join(', ') + ')';
+            }
+
+            function createEl() {
+                var square = document.createElement('div');
+    
+                square.style.width = 100 + 'px';
+                square.style.height = 100 + 'px';
+                square.style.borderStyle = "solid";
+                square.style.borderColor = randomColor();
+                square.style.backgroundColor = randomColor();
+                square.style.position = 'absolute';
+                square.style.borderRadius = 100 + 'px';
+                square.style.textAlign = "center";
+                square.style.color = randomColor();
+
+                square.innerHTML = "div";
+
+                return square;
+            }
+
+            function add(type) {
+
+                if (type === "ellipse") {
+                    var div = createEl();
+                    document.body.appendChild(div);
+
+                    function circMotion(element) {
+                        element.setAttribute("angleAttr", "0");
+                        element.style.left = "1000px";
+                        element.style.top = "200px";
+
+                        setInterval(function () {
+                            var angleInRadians = (element.getAttribute("angleAttr")) * (Math.PI / 180);
+                            var left = 80 * Math.cos(angleInRadians) + 400;
+                            var top = 80 * Math.sin(angleInRadians) + 130;
+                            console.log(angleInRadians);
+                            element.style.left = left + "px";
+                            element.style.top = top + "px";
+                            element.attributes.angleAttr.nodeValue++;
+                        }, 10);
+                    }
+
+                    circMotion(div);
+
+                } else if (type === "square") {
+
+                    var div = createEl();
+                    document.body.appendChild(div);
+
+                    function squareMotion(element) {
+                        var top = 50;
+                        var left = 50;
+
+                        setInterval(function () {
+                            if (top <= 200 && left == 50) {
+                                top++;
+                            } else if (left <= 200 && top > 199) {
+                                left++;
+                            } else if (left > 199 && top >= 50) {
+                                top--;
+                            } else if (top < 51 && left >= 50) {
+                                left--;
+                            }
+
+                            element.style.top = top + "px";
+                            element.style.left = left + "px";
+                        }, 10);
+                    }
+
+                    squareMotion(div);
+                }
+            }
+            return {
+                add: add
+            }
+
+        })();
+    </script>
+</body>
+</html>
